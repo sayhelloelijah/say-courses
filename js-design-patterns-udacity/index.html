@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cat Clicker</title>
+	<style>
+		.cat-clicker {
+			display:flex;
+			font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+			font-weight: 300;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.cat-clicker header {font-size: 3em; text-align: center;}
+		.cat-clicker h1 {margin:0; font-weight: 300;}
+		.cat-clicker .cat-image-container {display: flex; align-items: center;}
+		.cat-clicker img {border-radius: 15px;box-shadow: 2px 2px 20px #252525; cursor: pointer;}
+		.cat-clicker figcaption {display:flex; align-items: center; justify-content: flex-end;margin-top: 0.5em;}
+		.cat-clicker .click-count {padding: 5px 15px; background: #eee; border-radius: 5px;border:1px solid #ddd; font-weight: 600;}
+	</style>
+</head>
+<body class="cat-clicker">
+	<article>
+		<section>
+			<header>
+				<h1>Cat Clicker</h1>
+			</header>
+			<section class="cat-image-container">
+				<figure>
+					<img class="cat-image" src="https://placekitten.com/500/350" alt="Cat Image">
+					<figcaption>
+						<p>Cat Image Clicks: <span class="click-count">0</span></p>
+					</figcaption>
+				</figure>
+				<figure>
+					<img class="cat-image" src="https://placekitten.com/g/500/350" alt="Cat Image">
+					<figcaption>
+						<p>Cat Image Clicks: <span class="click-count">0</span></p>
+					</figcaption>
+				</figure>
+			</section>
+		</section>
+	</article>
+	<script src="index.js"></script>
+</body>
+</html>
