@@ -3,6 +3,7 @@ let catNames = ["Tiger", "Rex"];
 
 /**
  * Add click events to all cat images
+ * Increment counter with each click
  */
 cats.forEach(image => image.addEventListener('click', function() {
 	let counter = this.parentNode.querySelector('.click-count');
@@ -10,21 +11,23 @@ cats.forEach(image => image.addEventListener('click', function() {
 }));
 
 /**
- * Add Cat's Name
+ * Add Name
+ * adds given name to the DOM before the given element
+ * 
  * @param {String} el			Tag Name to be created
  * @param {String} text 	Cat's Name
+ * @param {Node}   place  DOM element to place new element before
  */
 function addName(el, text, place) {
 	let newEl = document.createElement(el); 
-	// and give it some content 
 	let newContent = document.createTextNode(text); 
-	// add the text node to the newly created div
 	newEl.appendChild(newContent);  
-
-	// add the newly created element and its content into the DOM  
 	place.prepend(newEl);
 }
 
+/**
+ * Add Names to each instance of cat
+ */
 cats.forEach((image, i) => {
 	addName('h2', catNames[i], image.parentNode);
 });
