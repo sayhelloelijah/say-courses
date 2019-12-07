@@ -8,15 +8,19 @@
 			display:flex;
 			font-family: 'Roboto', 'Helvetica Neue', sans-serif;
 			font-weight: 300;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
 		}
-		
+		.cat-clicker > article {width: 60em; margin: 0 auto; padding: 10px;}
+		.cat-clicker > article > section {display: flex; flex-wrap: wrap; justify-content: space-between;}
+		.cat-clicker > article > section > header {width: 100%;}
 		.cat-clicker header {font-size: 3em; text-align: center;}
 		.cat-clicker h1 {margin:0; font-weight: 300;}
-		.cat-clicker .cat-image-container {display: flex; align-items: center;}
-		.cat-clicker img {border-radius: 15px;box-shadow: 2px 2px 20px #252525; cursor: pointer;}
+		.cat-clicker h2 {margin-top: 0;}
+		.cat-clicker .cat-list-container {width: 25%;}
+		.cat-clicker .cat-list {list-style: none; padding: 0;}
+		.cat-clicker .cat-list-item {border-bottom: 2px solid #ffd700; background-color: #f0f0f0; margin-bottom: 7px; border-right: 2px solid #ffd700; border-radius: 15px; padding: 10px 15px; font-size: 2em; cursor: pointer; transition: .2s all ease;}
+		.cat-clicker .cat-list-item:hover {color: #525252; transform: scale(.99)}
+		.cat-clicker .cat-image-container {display: flex; flex-wrap: wrap; width: 75%;}
+		.cat-clicker img {border-radius: 15px;box-shadow: 2px 2px 20px #252525; cursor: pointer; max-width: 100%; height: auto;}
 		.cat-clicker figcaption {display:flex; align-items: center; justify-content: flex-end;margin-top: 0.5em;}
 		.cat-clicker .click-count {padding: 5px 15px; background: #eee; border-radius: 5px;border:1px solid #ddd; font-weight: 600;}
 	</style>
@@ -27,19 +31,11 @@
 			<header>
 				<h1>Cat Clicker</h1>
 			</header>
+			<section class="cat-list-container">
+				<ul class="cat-list"></ul>
+			</section>
 			<section class="cat-image-container">
-				<figure>
-					<img class="cat-image" src="https://placekitten.com/500/350" alt="Cat Image">
-					<figcaption>
-						<p>Cat Image Clicks: <span class="click-count">0</span></p>
-					</figcaption>
-				</figure>
-				<figure>
-					<img class="cat-image" src="https://placekitten.com/g/500/350" alt="Cat Image">
-					<figcaption>
-						<p>Cat Image Clicks: <span class="click-count">0</span></p>
-					</figcaption>
-				</figure>
+			<!--	Cats Dynamically Loaded here  -->
 			</section>
 		</section>
 	</article>
