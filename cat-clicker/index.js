@@ -26,7 +26,7 @@
 		},
 		
 		getCatById: function(id) {
-			return modal.getCats().filter(cat => Number(cat.id) == id);
+			return modal.getCats().filter(cat => parseInt(cat.id) == id);
 		},
 		
 		incrementCounter: function(id) {
@@ -77,7 +77,7 @@
 			let template = '';
 			catListItems.forEach(function(item) {
 				item.addEventListener('click', function() {
-					view.renderCatImage(Number(item.dataset.id));
+					view.renderCatImage(parseInt(item.dataset.id));
 					view.addImageClickEvent();
 				});
 			});
