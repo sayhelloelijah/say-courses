@@ -45,7 +45,53 @@
 		init: function() {
 			this.catList = document.querySelector('.cat-list');
 			this.catImage = document.querySelector('.cat-image-container');
+			this.adminToggle = document.querySelector('.admin-toggle');
+			this.adminCancel = document.querySelector('.admin-cancel');
+			this.adminSubmit = document.querySelector('.admin-submit');
+			this.admin = document.querySelector('.admin-form');
 			view.render();
+		},
+		
+		showForm: function() {
+			this.admin.style.display = 'flex';
+		},
+		
+		hideForm: function() {
+			this.admin.style.display = 'none';
+		},
+		
+		toggleForm: function() {
+			this.admin.style.display == 'none' ? this.admin.style.display = 'flex' : this.admin.style.display = 'none';
+		},
+		
+		renderAdminForm: function() {
+			let that = this;
+			this.adminToggle.addEventListener('click', function() {
+				let cat = controller.getCatById(that.catImage.querySelector('.cat-image').dataset.id);
+				that.admin.querySelector('input[name=name]').value = cat[0].name;
+				that.admin.querySelector('input[name=image-url]').value = cat[0].image;
+				that.admin.querySelector('input[name=clicks]').value = cat[0].clicks;
+				that.showForm();
+			});
+			
+			this.adminSubmit.addEventListener('click', function(e) {
+				e.preventDefault();
+				that.submitAdminForm(that.catImage.querySelector('.cat-image').dataset.id);
+				that.hideForm();
+				view.render();
+			});
+			
+			this.adminCancel.addEventListener('click', function() {
+				that.hideForm();
+			});
+		},
+		
+		submitAdminForm: function(id) {
+			let data = modal.getCats();
+			data[id].name = this.admin.querySelector('input[name=name]').value;
+			data[id].image = this.admin.querySelector('input[name=image-url]').value;
+			data[id].clicks = this.admin.querySelector('input[name=clicks]').value;
+			modal.updateData(data);
 		},
 		
 		renderCatList: function() {
@@ -97,6 +143,7 @@
 			view.renderCatImage(id);
 			view.addListClickEvents();
 			view.addImageClickEvent();
+			view.renderAdminForm();
 		}
 	};
 	
