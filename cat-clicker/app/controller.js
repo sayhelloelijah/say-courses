@@ -1,7 +1,8 @@
-import { modal, view } from './app';
+import { modal } from './modal.js';
+import { view } from './view.js';
 
 export const controller = {
-	getCats: function() {
+	getAllCats: function() {
 		return modal.getCats();
 	},
 
@@ -12,6 +13,10 @@ export const controller = {
 	incrementCounter: function(id) {
 		let data = modal.getCats();
 		data[id].clicks = controller.getCatById(id)[0].clicks += 1;
+		modal.updateData(data);
+	},
+	
+	save: function(data) {
 		modal.updateData(data);
 	},
 

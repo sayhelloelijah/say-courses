@@ -1,3 +1,6 @@
+/**
+ * File to be used if there's no ES6 Module support
+ */
 (function(){
 	
 	let modal = {
@@ -60,14 +63,11 @@
 			this.admin.style.display = 'none';
 		},
 		
-		toggleForm: function() {
-			this.admin.style.display == 'none' ? this.admin.style.display = 'flex' : this.admin.style.display = 'none';
-		},
-		
 		renderAdminForm: function() {
 			let that = this;
 			this.adminToggle.addEventListener('click', function() {
 				let cat = controller.getCatById(that.catImage.querySelector('.cat-image').dataset.id);
+				that.admin.dataset.id = cat[0].id;
 				that.admin.querySelector('input[name=name]').value = cat[0].name;
 				that.admin.querySelector('input[name=image-url]').value = cat[0].image;
 				that.admin.querySelector('input[name=clicks]').value = cat[0].clicks;
@@ -90,7 +90,7 @@
 			let data = modal.getCats();
 			data[id].name = this.admin.querySelector('input[name=name]').value;
 			data[id].image = this.admin.querySelector('input[name=image-url]').value;
-			data[id].clicks = this.admin.querySelector('input[name=clicks]').value;
+			data[id].clicks = parseInt( this.admin.querySelector('input[name=clicks]').value);
 			modal.updateData(data);
 		},
 		
@@ -103,17 +103,18 @@
 		},
 		
 		renderCatImage: function(id = 0) {
-			let template = '';
+			let template = '', that = this;
 			controller.getCatById(id).forEach(function(cat) {
 				template = `
 					<figure>
 						<h2>${cat.name}</h2>
 						<img class="cat-image" src="${cat.image}" data-id="${cat.id}" alt="Cat Image">
 						<figcaption>
-							<p>Cat Image Clicks: <span class="click-count">${cat.clicks}</span></p>
+							<p>Clicks: <span class="click-count">${cat.clicks}</span></p>
 						</figcaption>
 					</figure>
 				`;
+				that.admin.dataset.id = cat.id;
 			});
 			this.catImage.innerHTML = template;
 		},
