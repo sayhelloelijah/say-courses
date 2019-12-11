@@ -12,7 +12,7 @@ export const controller = {
 
 	incrementCounter: function(id) {
 		let data = modal.getCats();
-		data[id].clicks = controller.getCatById(id).clicks += 1;
+		data[id].clicks += 1;
 		modal.updateData(data);
 	},
 	
