@@ -21,17 +21,16 @@ export const view = {
 
 	renderCatImage: function(id = 0) {
 		let template = '';
-		controller.getCatById(id).forEach(function(cat) {
-			template = `
-				<figure>
-					<h2>${cat.name}</h2>
-					<img class="cat-image" src="${cat.image}" data-id="${cat.id}" alt="Cat Image">
-					<figcaption>
-						<p>Cat Image Clicks: <span class="click-count">${cat.clicks}</span></p>
-					</figcaption>
-				</figure>
-			`;
-		});
+		let cat = controller.getCatById(id);
+		template = `
+			<figure>
+				<h2>${cat.name}</h2>
+				<img class="cat-image" src="${cat.image}" data-id="${cat.id}" alt="Cat Image">
+				<figcaption>
+					<p>Cat Image Clicks: <span class="click-count">${cat.clicks}</span></p>
+				</figcaption>
+			</figure>
+		`;
 		this.catImage.innerHTML = template;
 	},
 	
@@ -39,10 +38,10 @@ export const view = {
 		let that = this;
 		this.adminToggle.addEventListener('click', function() {
 			let cat = controller.getCatById(that.catImage.querySelector('.cat-image').dataset.id);
-			that.admin.dataset.id = cat[0].id;
-			that.admin.querySelector('input[name=name]').value = cat[0].name;
-			that.admin.querySelector('input[name=image-url]').value = cat[0].image;
-			that.admin.querySelector('input[name=clicks]').value = cat[0].clicks;
+			that.admin.dataset.id = cat.id;
+			that.admin.querySelector('input[name=name]').value = cat.name;
+			that.admin.querySelector('input[name=image-url]').value = cat.image;
+			that.admin.querySelector('input[name=clicks]').value = cat.clicks;
 			that.showForm();
 		});
 
@@ -90,11 +89,15 @@ export const view = {
 	addImageClickEvent: function() {
 		let that = this;
 		this.catImage.querySelector('img').addEventListener('click', function() {
-			controller.getCatById(this.dataset.id).forEach(function(cat) {
-				controller.incrementCounter(cat.id);
-				that.render(cat.id);
-			});
+			let cat = controller.getCatById(this.dataset.id);
+			that.updateCounter(cat);
 		});
+	},
+	
+	updateCounter: function(cat) {
+		let counter = document.querySelector('.click-count');
+		controller.incrementCounter(cat.id);
+		counter.innerText = controller.getCatById(cat.id).clicks;
 	},
 
 	render: function(id) {

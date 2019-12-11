@@ -7,12 +7,12 @@ export const controller = {
 	},
 
 	getCatById: function(id) {
-		return modal.getCats().filter(cat => parseInt(cat.id) == id);
+		return modal.getCats().find(cat => parseInt(cat.id) == id);
 	},
 
 	incrementCounter: function(id) {
 		let data = modal.getCats();
-		data[id].clicks = controller.getCatById(id)[0].clicks += 1;
+		data[id].clicks = controller.getCatById(id).clicks += 1;
 		modal.updateData(data);
 	},
 	
